@@ -1,0 +1,11 @@
+.wrapper {
+  padding: 10px 32px;
+}
+
+.class-link {
+  cursor: pointer;
+}
+
+.class-border {
+  border-left: 32px solid #eee; padding-left:32px;
+}

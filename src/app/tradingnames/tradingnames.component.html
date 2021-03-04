@@ -1,0 +1,13 @@
+<div class="summary">
+  <p class="action"> Show Business Names : {{total}} </p>
+  <div class="class-categories">
+    <div class="flex-container">
+      <div *ngFor=" let item of names; let i=index">
+        <div class="small">
+          {{item.Trading_name}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

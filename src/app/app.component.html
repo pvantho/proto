@@ -1,0 +1,62 @@
+<div class="container wrapper">
+  <div class="row">
+    <div class="header">
+      <div   class="mt-4 mb-4" >
+        <div class="class-border">
+          <div style="color:#eee; font-size:50px" class="mt-4"> MELBOURNE BUSINESS LOOKUP</div>
+          <div style="font-size:50px;"> <span style="color:dodgerblue">Anyplace </span> - <span style="color:orange">Anywhere </span> -
+            <span style="color:#d9de29">
+        Anytime </span> </div>
+        <img  src="./assets/images/logo.jpg">
+        <h4 class="ml-4"> </h4>
+        </div>
+        <div class="mt-4" style="border-left: 32px solid #eee; padding-left:32px;" >
+          <div class="ml-4">
+            <h4 class="ml-4">  We can find  Organisations and Business Names for you in the CBD . </h4>
+          </div>
+        </div>
+        <div class="mt-4" style="border-left: 32px solid #eee; padding-left:32px;" >
+        <h3 class="mt-4 mb-4"> <img src="./assets/images/eatery.png" width="200px"> EATERIES </h3>
+
+        <div class="row">
+          <div class="col-sm-4 mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-front" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm5 10v2a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2v5a2 2 0 0 1-2 2H5z"/>
+            </svg>
+            <span  class="class-link"  (click)="goToCafesRestaurants()"> Cafes and Restaurants</span>
+          </div>
+          <div class="col-sm-4 mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-x-diamond-fill" viewBox="0 0 16 16">
+              <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L4.047 3.339 8 7.293l3.954-3.954L9.049.435zm3.61 3.611L8.708 8l3.954 3.954 2.904-2.905c.58-.58.58-1.519 0-2.098l-2.904-2.905zm-.706 8.614L8 8.708l-3.954 3.954 2.905 2.904c.58.58 1.519.58 2.098 0l2.905-2.904zm-8.614-.706L7.292 8 3.339 4.046.435 6.951c-.58.58-.58 1.519 0 2.098l2.904 2.905z"/>
+            </svg>
+            <span  class="class-link" (click)="goToPubs()"> Pubs, Taverns and Bars </span>
+          </div>
+          <div class="col-sm-4 mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-triangle-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767L7.022 1.566z"/>
+            </svg>
+            <span  class="class-link" (click)="goToTakeaway()"> Takeaway </span>
+          </div>
+
+        </div>
+      </div>
+      </div>
+
+      <div  style="border-left: 32px solid #eee; padding-left:32px;" class="mt-4 mb-4" >
+        This is a prototype written in NODEJS , KOA , Angular 11 And Sqlite3
+      </div>
+      <div class="class-border mt-4 mb-4" >
+      <p (click)="goToSearch()"> <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+        <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+      </svg> I WANT TO USE ADVANCED SEARCH  </p>
+      <p (click)="goToCategories()"> <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+        <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+      </svg> I WANT TO BROWSE BY CATEGORIES </p>
+      <p (click)="goToTradingNames()"> <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+        <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+      </svg> I WANT TO BROWSE BY TRADING NAMES </p>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

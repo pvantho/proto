@@ -1,0 +1,15 @@
+<div class="summary">
+
+  <div class="class-categories mt-4">
+    <h3 *ngIf="total"> {{category}} - Total. {{total}} </h3>
+    <div class="flex-container mt-4">
+
+      <div *ngFor=" let item of businessList; let i=index">
+
+        <div class="small class-category">
+          {{item.Trading_name}} . <span class="class-address">{{item.Street_address}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

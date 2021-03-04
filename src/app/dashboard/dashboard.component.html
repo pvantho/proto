@@ -1,0 +1,143 @@
+
+
+  <div class="row mt-4">
+    <div class="col-sm-12 text-center" *ngIf="location">
+      <div> <img src="./assets/images/marker.png" width="100px">
+        <p> Your Location</p>
+        <div class="small">{{location.latitude}},{{location.longitude}} </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-filter-circle-fill" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM3.5 5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zM5 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm2 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+      <div class="mt-4 mb-4 class-view" >
+        <div (click)="setView('details')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+          </svg> details
+        </div>
+      <div class="mt-2 class-view" >
+        <div (click)="setView('list')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+      </svg> list
+        </div>
+      </div>
+      <div class="mt-2 class-view" >
+        <div (click)="setView('table')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+      </svg>  table  </div>
+      </div>
+      </div>
+
+      <form [formGroup]="queryForm"  >
+        <div class="form-group">
+          <label>Seating Type</label>
+
+          <select class="custom-select" (change)="changeSeating($event)" formControlName="seating_type">
+            <option value="" disabled>Choose Seating?</option>
+            <option *ngFor="let t of seatingType" [ngValue]="t">{{t}}</option>
+          </select>
+          <label class="mt-4">Point: Lat,Lng </label>
+          <input type="text" formControlName="point" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+
+          <label class="mt-4">Radius</label>
+          <input type="number" formControlName="radius" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+
+          <label class="mt-4">Seats Number</label>
+          <input type="number" formControlName="number_seats" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+
+          <label class="mt-4">Trading Name</label>
+          <input type="text" formControlName="trading_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+
+        </div>
+        <button class="btn btn-primary" (click)="search()"> Search </button>
+
+      </form>
+    </div>
+    <div class="col-sm-10">
+
+      <div class="results" >
+        <div *ngIf="run;else run_complete "> <img src="./assets/images/search.png" width="200px"> Search in progress, Please wait ....</div>
+        <ng-template #run_complete >
+          <div  class="text-left mt-4 mb-4">
+            <p> <img src="./assets/images/find.jpg" width="200px">  We found <span class="total">[{{total}}]</span> items based on your search criteria </p>
+          </div>
+          <div  class="row" *ngIf="pie">
+            <div class="col-sm-4 text-center">
+              <img src="./assets/images/outdoor.png" width="32px"> [{{outdoorNumber}}]
+              <p> Outdoor </p>
+            </div>
+
+            <div class="col-sm-4 text-center">
+              <img src="./assets/images/indoor.png" width="32px"> [{{indoorNumber}}]
+              <p> Indoor</p>
+            </div>
+            <div class="col-sm-4 " >
+              <div class="row">
+                <div class="col-sm-4">
+                  <div   class="text-center">
+                    <div class="pie" [ngStyle]="pie"></div>
+                  </div>
+                </div>
+                <div class="col-sm-8 small">
+                  <div> Indoor:{{indoorPercent}} </div>
+                  <div>  Outdoor:{{outdoorPercent}} </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </ng-template>
+
+
+        <div class="mb-4 center-right class-summary" > N:Name&nbsp;&nbsp;T:Seating-Type &nbsp;&nbsp;A:Address&nbsp;&nbsp; S: Number of seats &nbsp;&nbsp;LL: Lat lng &nbsp;&nbsp;D:Distance</div>
+        <div *ngIf="resultView.option === 'details'">
+          <ul *ngIf="show" style="font-size:14px">
+            <li *ngFor=" let item of result; let i=index">
+              <span>{{i}} (N){{item.Trading_name}}</span>/
+              <span class="text-gray">(T){{item.Seating_type}}</span>/
+              <span><(A){{item.Street_address}}</span>/
+              <span class="text-gray">(S){{item.Number_seats}}</span>/
+              <span>(LL){{item.y_coordinate}},{{item.x_coordinate}}</span>/
+              <span class="text-gray">(D){{item.distance}}.m</span>
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="resultView.option === 'list'">
+          <div class="flex-container">
+          <div *ngFor=" let item of result; let i=index">
+            <div>
+             [{{i}}] {{item.Trading_name}}
+            </div>
+          </div>
+        </div>
+      </div>
+        <div *ngIf="resultView.option === 'table'">
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Type</th>
+                <th>Seats</th>
+              </tr>
+              <ng-container *ngFor="let item of result">
+                <tr>
+                  <td>{{item.Trading_name}}</td>
+                  <td>{{item.Street_address}}</td>
+                  <td>{{item.Seating_type}}</td>
+                  <td>{{item.Number_seats}}</td>
+                </tr>
+              </ng-container>
+
+
+            </table>
+          </div>
+
+        </div>
+    </div>
+  </div>
+  </div>

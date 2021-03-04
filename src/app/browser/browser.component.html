@@ -1,0 +1,12 @@
+<div class="summary">
+  <p class="action mt-4 mb-4">  LIST OF CATEGORIES OF INDUSTRY : {{total}} </p>
+  <div class="class-categories">
+    <div class="flex-container">
+      <div *ngFor=" let item of categories; let i=index">
+        <div class="small class-category" (click)="goToNames(item.Industry_code)">
+          {{item.Industry_description}} . {{item.Industry_code}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
