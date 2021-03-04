@@ -6,8 +6,8 @@ Angular 11,  a powerful and scallable UI framework for the front-end.
 Bootstrap 4 for responsive website.
 
 SQLite3 is one of the fast database used by many companies around the world to build performant web applications.
-Proto is using SQLITE3 VIEWS to access data. Proto does not see or manipulate Physical tables. All operations are against VIEWS.
-VIEWS allow applications to be independant of data repositories should the physical tables change.
+Proto is using SQLITE3 VIEWS to access data. Proto does not see or manipulate Physical tables. All queries are against VIEWS.
+VIEWS abstract the complexity of the schema to the applications and allow DAO layer to work on virtual tables instead of physical tables.
 
 The Dataset has been imported from the government website into a main table called cbd_eateries.
 Indexes have been created against columns such as trading_name, seating_type, number_of_seats, x_coordinate, y_coordinate, industry_description and industry_code to improve the search.
@@ -30,6 +30,13 @@ Organisation of folders :
             
             each controller has its  mapping.js file.
             mapping.js contains all the routes defined for your application.
+            
+            Below, we have added 3 middlewares (logRequest,userAuthentication,eateryRequestValidation)  to pipeline  to the endpoint (/api/eateries).
+            
+            
+            ex: const mapping = [
+                 { path: '/api/eateries' , controller: eateriesQuery(), type: 'Q', method: 'get',
+                         middleware: [logRequest(), userAuthentication(), eateryRequestValidation()]},
             
             index.js is where you tell KOA to use your routes defined in mapping.js 
             ex: 
@@ -57,16 +64,23 @@ Organisation of folders :
          the main entry of angular code.
          
  
+ It's important to accentuate on an missing feature is there's no cache feature that has been implemented in Proto in order to improve the search performance.
+ Authentication middleware is using a fake access token from the client side (Angular).
+ Also I have not added Authentication middleware to each Web API call , some routes do not have that middleware configured.
  
+ On Angular side, I did not implement State Management Library such as Ngrx or Ngxs or Akita.
+ It's overkilled for that simple application.
  
-#SERVER SIDE
-
-Tech/framework used
-  Koa 
+ Rxjs observables are being used but all the other features like map, concatmap etc... are not being used.
+ 
+ The proto architecture got to be simple and easy to use.
+   
+ 
+#SERVER SIDE  
+  Koa
   Sqlite3
 
 #CLIENT SIDE
-Tech/framework used
 Angular 11
 
 Below is the explanation of how to build and run Angular locally.
@@ -94,3 +108,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+Thanks so much for taking your time to read. I do hope that gives you a better understanding of Proto Architecture.
+
+
+
