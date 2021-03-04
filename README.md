@@ -62,7 +62,8 @@ Organisation of folders :
           logger (winston) and security configuration    
       9. src
          the main entry of angular code.
-         
+      10. database
+          that folder contains a proto database file.
  
  It's important to accentuate on an missing feature is there's no cache feature that has been implemented in Proto in order to improve the search performance.
  Authentication middleware is using a fake access token from the client side (Angular).
@@ -74,6 +75,58 @@ Organisation of folders :
  Rxjs observables are being used but all the other features like map, concatmap etc... are not being used.
  
  The proto architecture got to be simple and easy to use.
+ 
+ HOW PROTO HAS BEEN PUBLISHED :
+ 
+ The code of Proto has been deployed on my VPS running Ubuntu 18.
+ Apache2 is used as a reverse proxy.
+ The configuration file /etc/apache2/sites-available/000-default.conf
+ ex: 
+   <VirtualHost *:80>
+    ServerName samlrise.com
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined 
+    ProxyRequests Off
+
+   ProxyPreserveHost On
+   ProxyVia Full
+   <Proxy *>
+      Require all granted
+   </Proxy>
+   <Location /proto>
+     ProxyPass http://127.0.0.1:3000
+     ProxyPassReverse http://127.0.0.1:3000
+   </Location>
+   
+   
+  Proto is running on port 3000.
+  
+
+  SQLITE3 CONFIGURATION : 
+ 
+ Here is the link to download SQLite tool  https://www.sqlite.org/download.html.
+ 
+ CREATE A DATABASE : 
+ sqlite3 --verbose= path/to/database.
+ 
+       CREATE TABLE sqlite_sequence(name,seq);
+      CREATE TABLE cbd_eateries (
+        Census_year INTEGER,Block_ID INTEGER,Property_ID INTEGER,property ID INTEGER,Street_address TEXT,CLUE_small_area TEXT,
+        Trading_name TEXT,Industry_code INTEGER,Industry_description TEXT,
+        Seating_type TEXT,Number_seats INTEGER,x_coordinate REAL,y_coordinate REAL,Location TEXT);
+      CREATE VIEW eateries as
+        select distinct trading_name, location, seating_type, number_seats, y_coordinate ,x_coordinate , street_address  from cbd_eateries order by trading_name
+      /* eateries(Trading_name,Location,Seating_type,Number_seats,y_coordinate,x_coordinate,Street_address) */;
+      CREATE INDEX trading_name_index on cbd_eateries(trading_name);
+      CREATE INDEX number_seats_index  on cbd_eateries(number_seats);
+      CREATE INDEX x_coordinate_index on cbd_eateries(x_coordinate);
+      CREATE INDEX y_coordinate_index on cbd_eateries(y_coordinate);
+      CREATE INDEX Seating_type_index on cbd_eateries(Seating_type);
+      CREATE VIEW categories as select  count(*) as total , industry_description, industry_code from cbd_eateries group by industry_code
+      /* categories(total,Industry_description,Industry_code) */;
+      CREATE VIEW names as select  trading_name, industry_description, industry_code, count(trading_name)as total, street_address from cbd_eateries group by trading_name, industry_description, industry_code, street_address
+      /* names(Trading_name,Industry_description,Industry_code,total,Street_address) */;
+
    
  
 #SERVER SIDE  
