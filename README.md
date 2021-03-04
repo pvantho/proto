@@ -13,12 +13,17 @@ The Dataset has been imported from the government website into a main table call
 Indexes have been created against columns such as trading_name, seating_type, number_of_seats, x_coordinate, y_coordinate, industry_description and industry_code to improve the search.
 
 Proto Architecture is very simple and intuitive. It has been designed to help  developer to implement easily new middlewares and endpoints on Server side.
-Below are the main folders to know for a developer - 
+Below are the main folders to know for a developer.
+
+Organisation of folders :
+
       1. api
             it's where you declare all your endpoints in terms of REST API
             for each controller , we have commands and queries folder.
+            
             Queries folder contains all select only (READ)
             Commands folder contains delete/update operations (WRITE)
+            
             The READ and WRITE should use two different domain models or schemas(CQRS concept).
             We should have a schema designed for READ inorder to have a better performance.
             below is the informative link about CQRS https://medium.com/@sderosiaux/cqrs-what-why-how-945543482313
@@ -31,7 +36,7 @@ Below are the main folders to know for a developer -
                 .....
                 configureMappings(router)
                   .add(myMapping1)
-                  .add(my
+                  .add(myMapping2)
            
       2. services
             it's where your BUSINESS LOGIC needs to be implemented 
