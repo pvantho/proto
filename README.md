@@ -67,6 +67,12 @@ Organisation of folders :
  
  It's important to accentuate on an missing feature is there's no cache feature that has been implemented in Proto in order to improve the search performance.
  Authentication middleware is using a fake access token from the client side (Angular).
+ 
+ The pagination on client side is not being implemented - The complete result is being returned from Web Api.
+ For better performance only a set of records are to be returned to client.
+ Records should only be returned on demand.
+ 
+ 
  Also I have not added Authentication middleware to each Web API call , some routes do not have that middleware configured.
  
  On Angular side, I did not implement State Management Library such as Ngrx or Ngxs or Akita.
@@ -78,33 +84,33 @@ Organisation of folders :
  
  HOW PROTO HAS BEEN PUBLISHED :
  
- The code of Proto has been deployed on my VPS running Ubuntu 18.
- Apache2 is used as a reverse proxy.
- The configuration file /etc/apache2/sites-available/000-default.conf
- ex: 
-   <VirtualHost *:80>
-    ServerName samlrise.com
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined 
-    ProxyRequests Off
+      1.   The code of Proto has been deployed on my VPS running Ubuntu 18.
+             Apache2 is used as a reverse proxy.
+             The configuration file /etc/apache2/sites-available/000-default.conf
+             ex: 
+               <VirtualHost *:80>
+                ServerName samlrise.com
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                CustomLog ${APACHE_LOG_DIR}/access.log combined 
+                ProxyRequests Off
 
-   ProxyPreserveHost On
-   ProxyVia Full
-   <Proxy *>
-      Require all granted
-   </Proxy>
-   <Location /proto>
-     ProxyPass http://127.0.0.1:3000
-     ProxyPassReverse http://127.0.0.1:3000
-   </Location>
+               ProxyPreserveHost On
+               ProxyVia Full
+               <Proxy *>
+                  Require all granted
+               </Proxy>
+               <Location /proto>
+                 ProxyPass http://127.0.0.1:3000
+                 ProxyPassReverse http://127.0.0.1:3000
+               </Location>
    
    
-  Proto is running on port 3000.
+                 Proto is running on port 3000.
   
 
   SQLITE3 CONFIGURATION : 
  
- Here is the link to download SQLite tool  https://www.sqlite.org/download.html.
+  Here is the link to download SQLite tool  https://www.sqlite.org/download.html.
  
  CREATE A DATABASE : 
  sqlite3 --verbose= path/to/database.
