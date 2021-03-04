@@ -1,0 +1,38 @@
+{
+  "Path" : "./database/eateries.db",
+   "views": {
+     "eateries": {
+       "name": "eateries",
+       "script": "CREATE VIEW eateries as select distinct trading_name, location, seating_type, number_seats, y_coordinate ,x_coordinate , street_address  from cbd_eateries order by trading_name",
+       "query": {
+         "select_count": "select count(*) from eateries",
+         "columns": "trading_name, location, seating_type, number_seats, y_coordinate ,x_coordinate , street_address",
+         "limit": "limit 9999999"
+       }
+     },
+     "categories": {
+       "name": "categories",
+       "script": "CREATE VIEW categories as select  count(*) as total , industry_description, industry_code from cbd_eateries group by industry_code",
+       "query": {
+         "select_count": "select count(*) from categories",
+         "select_all": "select * from categories order by industry_description",
+         "select_by_code": "select * from categories where industry_code ${op} ${value}",
+         "select_by_filter": "select * from categories where industry_description like '%${value}%' or industry_code='${value}' order by industry_description",
+         "columns": "total, industry_description, industry_code",
+         "limit": "limit 9999999"
+       }
+     },
+     "names" : {
+       "name": "names",
+       "script": "CREATE VIEW names as  select  trading_name, industry_description, industry_code, count(trading_name)as total from cbd_eateries group by trading_name, industry_description, industry_code order by trading_name",
+       "query": {
+         "select_count": "select count(*) from names",
+         "select_all": "select * from names order by trading_name",
+         "select_by_code": "select * from names where industry_code = '${value}' or industry_description like '%${value}%'",
+         "select_by_filter": "select * from names  where trading_name like '%${value}%' order by trading_name",
+         "columns": "trading_name, industry_description, industry_code , total",
+         "limit": "limit 9999999"
+       }
+     }
+   }
+}
